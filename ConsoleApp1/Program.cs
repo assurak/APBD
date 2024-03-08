@@ -2,7 +2,8 @@
 
 Console.WriteLine("Hello, World!");
 int[] tab = { 1, 2, 3, 4, 5 };
-Console.Write(GetAvg(tab));
+Console.WriteLine(GetAvg(tab));
+Console.WriteLine(GetMax(tab));
 
 return;
 
@@ -18,4 +19,14 @@ static double GetAvg(int[] tab)
     }
 
     return sum / tab.Length;
+}
+
+static int GetMax(int[] tab)
+{
+    int max = tab[0];
+    for (int i = 1; i < tab.Length; i++)
+    {
+        if (tab[i] > max) max = tab[i];
+    }
+    return max;
 }
