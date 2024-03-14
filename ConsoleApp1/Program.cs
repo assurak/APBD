@@ -13,6 +13,7 @@ return;
 static double GetAvg(int[] tab)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     int sum = 0;
     for (int i = 0; i < tab.Length; i++)
     {
@@ -22,12 +23,19 @@ static double GetAvg(int[] tab)
     return sum / tab.Length;
 =======
     int sumo = 0;
+=======
+    int sum = 0;
+>>>>>>> feature-new
     for (int i = 0; i < tab.Length; i++)
     {
-        sumo += tab[i];
+        sum += tab[i];
     }
 
+<<<<<<< HEAD
     return sumo / tab.Length;
+>>>>>>> feature-new
+=======
+    return sum / tab.Length;
 >>>>>>> feature-new
 }
 
