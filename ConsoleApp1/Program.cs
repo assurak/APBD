@@ -12,13 +12,13 @@ return;
 
 static double GetAvg(int[] tab)
 {
-    int sum = 0;
+    int sum1 = 0;
     for (int i = 0; i < tab.Length; i++)
     {
-        sum += tab[i];
+        sum1 += tab[i];
     }
 
-    return sum / tab.Length;
+    return sum1 / tab.Length;
 }
 
 static int GetMax(int[] tab)
