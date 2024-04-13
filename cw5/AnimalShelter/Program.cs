@@ -51,6 +51,18 @@ app.MapDelete("/DeleteAnimal", (int id, IMockDb mockDb) =>
     return TypedResults.Ok();
 });
 
+app.MapGet("/GetVisitsForAnimal", (int id, IMockDb mockDb) =>
+{
+    var visits = mockDb.GetVisitsForAnimal(id);
+    if (visits is null) return TypedResults.NotFound();
+    return Results.Ok(visits);
+});
+
+app.MapPost("/AddVisit", (Visit visit, IMockDb mockDb) =>
+{
+    mockDb.AddVisit(visit);
+    return TypedResults.Created();
+});
 
 app.Run();
 

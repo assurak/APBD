@@ -9,11 +9,14 @@ interface IMockDb
     public void Add(Animal animal);
     public void Update(Animal animal, int id);
     public void Delete(int id);
+    public IEnumerable<Visit> GetVisitsForAnimal(int id);
+    public void AddVisit(Visit visit);
 }
 
 public class MockDb : IMockDb
 {
     private ICollection<Animal> _animals;
+    private ICollection<Visit> _visits;
 
     public MockDb()
     {
@@ -41,6 +44,22 @@ public class MockDb : IMockDb
             category = "kot",
             weight = 0.5,
             color = "bialy"
+        });
+
+        _visits = new List<Visit>();
+        (_visits as List<Visit>)?.Add(new Visit
+        {
+            date = new DateTime(2015, 10, 21),
+            animalId = 1,
+            visitDescription = "heh",
+            price = 1
+        });
+        (_visits as List<Visit>)?.Add(new Visit
+        {
+            date = new DateTime(2022, 12, 22),
+            animalId = 1,
+            visitDescription = "heheeee",
+            price = 33
         });
     }
 
@@ -73,5 +92,15 @@ public class MockDb : IMockDb
     public void Delete(int id)
     {
         _animals.Remove(_animals.FirstOrDefault(animal => animal.ID == id));
+    }
+
+    public IEnumerable<Visit> GetVisitsForAnimal(int id)
+    {
+        return _visits.Where(visit => visit.animalId == id);
+    }
+
+    public void AddVisit(Visit visit)
+    {
+        _visits.Add(visit);
     }
 }
