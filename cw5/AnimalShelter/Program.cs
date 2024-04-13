@@ -26,5 +26,31 @@ app.MapGet("/GetAllAnimals", (IMockDb mockDb) =>
     return TypedResults.Ok(mockDb.GetAll());
 });
 
+app.MapGet("/GetOneAnimal{id:int}", (int id,IMockDb mockDb) =>
+{
+    var animal = mockDb.GetOne(id);
+    if (animal is null) return TypedResults.NotFound();
+    return Results.Ok(animal);
+});
+
+app.MapPost("/AddAnimal", (Animal animal,IMockDb mockDb) =>
+{
+    mockDb.Add(animal);
+    return TypedResults.Created();
+});
+
+app.MapPut("/UpdateAnimal", (Animal animal,int id, IMockDb mockDb) =>
+{
+    mockDb.Update(animal,id);
+    return TypedResults.Ok();
+});
+
+app.MapDelete("/DeleteAnimal", (int id, IMockDb mockDb) =>
+{
+    mockDb.Delete(id);
+    return TypedResults.Ok();
+});
+
+
 app.Run();
 

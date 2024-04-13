@@ -1,8 +1,14 @@
-﻿namespace AnimalShelter;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+
+namespace AnimalShelter;
 
 interface IMockDb
 {
     public ICollection<Animal> GetAll();
+    public Animal GetOne(int id);
+    public void Add(Animal animal);
+    public void Update(Animal animal, int id);
+    public void Delete(int id);
 }
 
 public class MockDb : IMockDb
@@ -41,5 +47,31 @@ public class MockDb : IMockDb
     public ICollection<Animal> GetAll()
     {
         return _animals;
+    }
+
+    public Animal GetOne(int id)
+    {
+        return _animals.FirstOrDefault(animal => animal.ID == id);
+    }
+
+    public void Add(Animal animal)
+    {
+        _animals.Add(animal);
+    }
+
+    public void Update(Animal animal, int id)
+    {
+        Animal animalToUpdate = _animals.FirstOrDefault(animal => animal.ID == id);
+        
+        animalToUpdate.ID = animal.ID;
+        animalToUpdate.name = animal.name;
+        animalToUpdate.category = animal.category;
+        animalToUpdate.weight = animal.weight;
+        animalToUpdate.color = animal.color;
+    }
+
+    public void Delete(int id)
+    {
+        _animals.Remove(_animals.FirstOrDefault(animal => animal.ID == id));
     }
 }
