@@ -5,6 +5,8 @@ public interface IMockDb
     public ICollection<Todo> GetAll();
     public bool Add(Todo todo);
     public Todo GetOne(int id);
+    public bool Delete(int id);
+    public void UpdateT(Todo todo, int id);
 }
 
 public class MockDb : IMockDb
@@ -35,5 +37,18 @@ public class MockDb : IMockDb
     public Todo? GetOne(int id)
     {
         return _todos.FirstOrDefault(todo => todo.ID == id);
+    }
+
+    public bool Delete(int id)
+    {
+        _todos.Remove(_todos.FirstOrDefault(todo => todo.ID == id));
+        return true;
+    }
+
+    public void UpdateT(Todo todo2, int id)
+    {
+        Todo todoToUpdate = _todos.FirstOrDefault(todo => todo.ID == id);
+        todoToUpdate.ID = todo2.ID;
+        todoToUpdate.Desctription = todo2.Desctription;
     }
 }

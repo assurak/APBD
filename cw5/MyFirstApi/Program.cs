@@ -48,9 +48,16 @@ app.MapGet("/todos/{id:int}", (int id,IMockDb mockDb) =>
     return Results.Ok(todo);
 });
 
-/*app.MapPut("/todos", (int id, MockDb mockDb, Todo todo) =>
+app.MapDelete("/todos", (int id, IMockDb mockDb) =>
 {
+    mockDb.Delete(id);
 
-});*/
+    return TypedResults.Ok("deleted");
+});
+
+app.MapPut("/todosPut", (Todo todo,int id, IMockDb mockDb) =>
+{
+    mockDb.UpdateT(todo,id);
+});
 
 app.Run();
